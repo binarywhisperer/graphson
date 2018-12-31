@@ -17,5 +17,10 @@
     },
     "autoload": {
         "psr-4": {"Graph\\": "src/"}
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.0.0"
+        }
     }
 }
