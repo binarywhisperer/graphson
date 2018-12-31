@@ -1,9 +1,9 @@
 language: php
 php:
-- '7.2'
-- nightly
-matrix
+  - '7.2'
+  - nightly
+matrix:
   allow_failures:
-  - php: nightly
+    - php: nightly
 before_script: composer install
 script: vendor/bin/phpunit

@@ -25,10 +25,21 @@ class Graph
         }
     }
 
+    /**
+     * Count number of vertices
+     *
+     * @return int
+     */
+
     public function countVertices(){
         return count($this->vertices);
     }
 
+    /**
+     * Count number of edges
+     *
+     * @return int
+     */
     public function countEdges(){
         return count($this->edges);
     }
