@@ -3,12 +3,12 @@
 namespace Graph\Tests\Unit;
 
 use Graph\Graph;
-use Graph\Tests\Unit\Traits\UnitTestDataTrait;
+use Faker\Factory;
+use Graph\Vertex;
 use PHPUnit\Framework\TestCase;
 
 final class GraphTest extends TestCase
 {
-    use UnitTestDataTrait;
 
     /**
      * @param $vertex
@@ -22,5 +22,14 @@ final class GraphTest extends TestCase
             $graph->vertices[$vertex->id],
             $vertex
         );
+    }
+
+    public function vertexProvider(){
+        $data = [];
+        for($i = 0; $i < 100; $i++){
+            $vertex = new Vertex($i);
+            $data[] = [$vertex];
+        }
+        return $data;
     }
 }

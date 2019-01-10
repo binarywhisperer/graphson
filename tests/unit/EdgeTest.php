@@ -3,13 +3,11 @@
 namespace Graph\Tests\Unit;
 
 use Graph\Edge;
-use Graph\Graph;
-use Graph\Tests\Unit\Traits\UnitTestDataTrait;
+use Faker\Factory;
 use PHPUnit\Framework\TestCase;
 
 final class EdgeTest extends TestCase
 {
-    use UnitTestDataTrait;
 
     /**
      * @param $key
@@ -38,5 +36,14 @@ final class EdgeTest extends TestCase
             null,
             $edge->{$key}
         );
+    }
+
+    public function dataProvider(){
+        $faker = Factory::create();
+        $data = [];
+        for($i = 0; $i < 100; $i++){
+            $data[] = [$faker->word, $faker->streetName];
+        }
+        return $data;
     }
 }

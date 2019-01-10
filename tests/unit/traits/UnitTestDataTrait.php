@@ -12,7 +12,7 @@ trait UnitTestDataTrait
 
     public function graphProvider(){
         $data = [];
-        for($i = 0; $i < $this->iterations; $i++){
+        for($i = 0; $i < 100; $i++){
             $json = [
                 'vertices' => [],
                 'edges' => []
@@ -28,7 +28,7 @@ trait UnitTestDataTrait
     public function dataProvider(){
         $faker = Factory::create();
         $data = [];
-        for($i = 0; $i < $this->iterations; $i++){
+        for($i = 0; $i < 100; $i++){
             $data[] = [$faker->word, $faker->streetName];
         }
         return $data;
@@ -36,7 +36,7 @@ trait UnitTestDataTrait
 
     public function vertexProvider(){
         $data = [];
-        for($i = 0; $i < $this->iterations; $i++){
+        for($i = 0; $i < 100; $i++){
             $vertex = new Vertex($i);
             $data[] = [$vertex];
         }
@@ -45,8 +45,8 @@ trait UnitTestDataTrait
 
     public function edgeProvider(){
         $data = [];
-        for($i = 0; $i < $this->iterations; $i++){
-            $edge = new Edge($i, $this->iterations - $i);
+        for($i = 0; $i < 100; $i++){
+            $edge = new Edge($i, 100 - $i);
             $data[] = [$edge];
         }
         return $data;
