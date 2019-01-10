@@ -1,5 +1,5 @@
 {
-    "name": "binarywhisperer/graph",
+    "name": "binarywhisperer/graphson",
     "description": "PHP Objects representing Graphs with JSON import and export.",
     "type": "library",
     "require-dev": {
