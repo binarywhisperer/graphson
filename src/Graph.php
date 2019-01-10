@@ -2,45 +2,61 @@
 
 namespace Graph;
 
-
 class Graph
 {
-    protected $vertexNames = ['vertices'];
-    protected $edgeNames = ['edges'];
+    public $vertices = [];
+    public $edges = [];
 
-    protected $vertices = [];
-    protected $edges = [];
-
-    public function __construct($json){
-        $this->importFromJSON($json);
+    public function addVertex(Vertex $vertex){
+        $this->vertices[$vertex->id] = $vertex;
     }
 
-    protected function importFromJSON($json){
-        foreach($json as $key => $value){
-            if(in_array($key, $this->vertexNames)){
-                $this->vertices = array_merge($this->vertices, $value);
-            }elseif(in_array($key, $this->edgeNames)){
-                $this->edges = array_merge($this->edges, $value);
+    public function hasVertex($vertex){
+        return array_key_exists($vertex, $this->vertices);
+    }
+
+    public function hasVertices(...$vertices){
+        return array_reduce($vertices, function($aggregate, $vertex){
+            if(!array_key_exists($vertex, $this->vertices)){
+                $aggregate = false;
+            }
+            return $aggregate;
+        }, true);
+    }
+
+    public function addEdge(Edge $edge){
+        if(!$this->canAddEdge($edge)){
+            $this->edges[] = $edge;
+            return true;
+        }
+        return false;
+    }
+
+    private function canAddEdge(Edge $edge){
+        if($this->hasVertices($edge->vertex1, $edge->vertex2)){
+            return false;
+        }
+        if(!$this->hasEdge($edge->vertex1, $edge->vertex2)){
+            return false;
+        }
+        return true;
+    }
+
+    public function hasEdge($vertex1, $vertex2){
+        foreach($this->edges as $edge){
+            if($edge->hasVertex($vertex1) && $edge->hasVertex($vertex2)){
+                return true;
             }
         }
+        return true;
     }
 
-    /**
-     * Count number of vertices
-     *
-     * @return int
-     */
-
-    public function countVertices(){
-        return count($this->vertices);
-    }
-
-    /**
-     * Count number of edges
-     *
-     * @return int
-     */
-    public function countEdges(){
-        return count($this->edges);
+    public function hasEdges(...$edges){
+        foreach($edges as $edge){
+            if(!$this->hasEdge($edge->vertex1, $edge->vertex2)){
+                return false;
+            }
+        }
+        return true;
     }
 }
