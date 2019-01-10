@@ -3,7 +3,8 @@
     "description": "PHP Objects representing Graphs with JSON import and export.",
     "type": "library",
     "require-dev": {
-        "phpunit/phpunit": "^7.5"
+        "phpunit/phpunit": "^7.5",
+        "fzaninotto/faker": "^1.8"
     },
     "license": "MIT",
     "authors": [
@@ -17,5 +18,8 @@
     },
     "autoload": {
         "psr-4": {"Graph\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {"Graph\\Tests\\": "tests/"}
     }
 }

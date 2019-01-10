@@ -11,6 +11,19 @@ class Graph
         $this->vertices[$vertex->id] = $vertex;
     }
 
+    public function hasVertex($vertex){
+        return array_key_exists($vertex, $this->vertices);
+    }
+
+    public function hasVertices(...$vertices){
+        return array_reduce($vertices, function($aggregate, $vertex){
+            if(!array_key_exists($vertex, $this->vertices)){
+                $aggregate = false;
+            }
+            return $aggregate;
+        }, true);
+    }
+
     public function addEdge(Edge $edge){
         if(!$this->canAddEdge($edge)){
             $this->edges[] = $edge;
@@ -38,16 +51,12 @@ class Graph
         return true;
     }
 
-    public function hasVertex($vertex){
-        return array_key_exists($vertex, $this->vertices);
-    }
-
-    public function hasVertices(...$vertices){
-        return array_reduce($vertices, function($aggregate, $vertex){
-            if(!array_key_exists($vertex, $this->vertices)){
-                $aggregate = false;
+    public function hasEdges(...$edges){
+        foreach($edges as $edge){
+            if(!$this->hasEdge($edge->vertex1, $edge->vertex2)){
+                return false;
             }
-            return $aggregate;
-        }, true);
+        }
+        return true;
     }
 }

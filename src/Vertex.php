@@ -3,22 +3,23 @@
 namespace Graph;
 
 
+use Graph\Traits\HasData;
+
 class Vertex
 {
+    use HasData;
+
     protected $id;
     protected $data;
 
-    public function __construct($id, $data)
+    public function __construct($id, $data = [])
     {
         $this->id = $id;
         $this->data = $data;
     }
 
-    public function __get($name)
+    public function __get($key)
     {
-        if (array_key_exists($name, $this->data)) {
-            return $this->data[$name];
-        }
-        return null;
+        return $this->getData($key);
     }
 }

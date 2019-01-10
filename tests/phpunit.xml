@@ -8,6 +8,7 @@
          convertWarningsToExceptoins="true"
          processIsolaction="false"
          stopOnfailure="false">
+
     <testuites>
         <testsuite name="Unit">
             <directory>./tests</directory>
