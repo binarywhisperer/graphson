@@ -4,11 +4,10 @@ namespace Graph\Tests\Unit;
 
 use Graph\Vertex;
 use PHPUnit\Framework\TestCase;
-use Graph\Tests\Unit\Traits\UnitTestDataTrait;
+use Faker\Factory;
 
 final class VertexTest extends TestCase
 {
-    use UnitTestDataTrait;
 
     /**
      * @param $key
@@ -37,5 +36,14 @@ final class VertexTest extends TestCase
             null,
             $vertex->{$key}
         );
+    }
+
+    public function dataProvider(){
+        $faker = Factory::create();
+        $data = [];
+        for($i = 0; $i < 100; $i++){
+            $data[] = [$faker->word, $faker->streetName];
+        }
+        return $data;
     }
 }
